@@ -13,13 +13,19 @@
 </head>
 <body>
 <H1>List of Legions</H1>
+
+<p><a href='<c:url value="/create-legion" />'>Create new legion</a></p>
+
 <table>
-<c:forEach var="legions" items="${legionList}">
-    <tr><td>${legions.id}</td>
-    <td>${legions.legion_name}</td>
-    </tr>
-</c:forEach>
+    <c:forEach var="legions" items="${legionList}">
+        <tr>
+            <td>${legions.id}</td>
+            <td>${legions.legion_name}</td>
+        </tr>
+    </c:forEach>
 </table>
+
+<a href="/">Main page</a>
 </body>
 </html>
 

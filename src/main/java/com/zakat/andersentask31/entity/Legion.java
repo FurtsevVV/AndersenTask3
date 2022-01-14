@@ -9,8 +9,8 @@ public class Legion {
     public Legion() {
     }
 
-    public Legion(Integer id, String legion_name) {
-        this.id = id;
+    public Legion(String legion_name) {
+
         this.legion_name = legion_name;
     }
 

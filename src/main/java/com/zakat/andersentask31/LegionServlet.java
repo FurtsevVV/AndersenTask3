@@ -32,14 +32,17 @@ public class LegionServlet extends HttpServlet {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM legions");
 
-            while (resultSet.next()){
+            while (resultSet.next()) {
 
-    int id = Integer.parseInt(resultSet.getString("id"));
-     String legionname = resultSet.getString("legion_name");
-     legionList.add(new Legion(id, legionname));
-}
+                int id = Integer.parseInt(resultSet.getString("id"));
+                String legionname = resultSet.getString("legion_name");
+                Legion legion = new Legion();
+                legion.setLegion_name(legionname);
+                legion.setId(id);
+                legionList.add(legion);
+            }
 
-        statement.close();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
