@@ -1,9 +1,19 @@
 package com.zakat.andersentask31.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Objects;
 
+@Entity
+@Table(name = "legions")
 public class Legion {
+
+    @Id
+    @Column(name = "id")
     Integer id;
+    @Column(name = "legion_name")
     String legion_name;
 
     public Legion() {

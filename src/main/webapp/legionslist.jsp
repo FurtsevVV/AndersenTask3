@@ -17,10 +17,28 @@
 <p><a href='<c:url value="/create-legion" />'>Create new legion</a></p>
 
 <table>
+    <tr>
+        <th><strong>ID: </strong></th>
+        <th><strong>Legion name: </strong></th>
+        <th><strong>Operations: </strong></th>
+    </tr>
     <c:forEach var="legions" items="${legionList}">
+
         <tr>
             <td>${legions.id}</td>
             <td>${legions.legion_name}</td>
+            <td>
+                <form method="post" action="<c:url value="/deleteLegion" />">
+                    <input type="text" hidden name="id" value="${legions.getId()}">
+                    <input type="submit" name="delete" value="Delete legion">
+                </form>
+            </td>
+            <td>
+                <form method="get" action="<c:url value="/updateLegion"/>">
+                    <input type="number" hidden name="id" value="${legions.getId()}">
+                    <input type="submit" value="Change Name">
+                </form>
+            </td>
         </tr>
     </c:forEach>
 </table>

@@ -1,7 +1,8 @@
-package com.zakat.andersentask31.entity;
+package com.zakat.andersentask31;
 
 import com.zakat.andersentask31.DAO.LegionDAO;
 import com.zakat.andersentask31.DAO.LegionDAOInterface;
+import com.zakat.andersentask31.entity.Legion;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 
 @WebServlet("/create-legion")
@@ -25,9 +27,12 @@ public class CreateLegionServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("legion_name");
         Legion legion = new Legion(name);
-        legionDAO.insert(legion);
+        try {
+            legionDAO.insert(legion);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         resp.sendRedirect(req.getContextPath() + "/legionslist");
-
     }
 
 }
