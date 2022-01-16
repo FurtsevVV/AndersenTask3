@@ -8,8 +8,8 @@
 <h1><%= "Imperium database" %>
 </h1>
 <br/>
-<a href="hello-servlet">Hello Servlet</a>
 <br>
 <a href="/legionslist">List of Legions</a>
+<a href="/all-planet">Planet Details</a>
 </body>
 </html>
