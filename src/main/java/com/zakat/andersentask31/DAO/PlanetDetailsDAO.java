@@ -44,22 +44,87 @@ List<PlanetDetails> planetDetailsList = new ArrayList<>();
     }
 
     @Override
-    public void addPlanetDetails() {
+    public void addPlanetDetails(PlanetDetails planetDetails) {
+        try {
+            Class.forName(postgresDriver).getDeclaredConstructor().newInstance();
+            try (Connection conn = DriverManager.getConnection(url, username, password)) {
+
+                String sql = "INSERT INTO planet_details (planet_name, population) Values (?, ?)";
+                try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+                    preparedStatement.setString(1, planetDetails.getPlanet());
+                    preparedStatement.setInt(2, planetDetails.getPopulation());
+                    preparedStatement.executeUpdate();
+                }
+            }
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
 
     }
 
     @Override
     public PlanetDetails findPlanetDetailsById(int id) {
-        return null;
+PlanetDetails pd = new PlanetDetails();
+int gettingID = 0;
+String planet = "";
+int population =0;
+                try {
+            Class.forName(postgresDriver).getDeclaredConstructor().newInstance();
+            try (Connection conn = DriverManager.getConnection(url, username, password)) {
+                String sql = "SELECT * FROM planet_details WHERE planet_id = (?)";
+                try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+                    preparedStatement.setInt(1, id);
+                    ResultSet resultSet = preparedStatement.executeQuery();
+                    if (resultSet.next()) {
+                        gettingID = resultSet.getInt("planet_id");
+                        planet = resultSet.getString("planet_name");
+                        population = resultSet.getInt("population");
+                    }
+                }
+            }
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+pd.setPlanet_id(gettingID);
+                pd.setPlanet(planet);
+                pd.setPopulation(population);
+return pd;
+
+
     }
 
     @Override
     public void deletePlanetDetails(int id) {
-
+        try {
+            Class.forName(postgresDriver).getDeclaredConstructor().newInstance();
+            try (Connection conn = DriverManager.getConnection(url, username, password)) {
+                String sql = "DELETE FROM planet_details WHERE planet_id = (?)";
+                try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+                    preparedStatement.setInt(1, id);
+                    preparedStatement.executeUpdate();
+                }
+            }
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
     }
 
     @Override
     public void updatePlanetDetails(PlanetDetails planetDetails) {
+        try {
+            Class.forName(postgresDriver).getDeclaredConstructor().newInstance();
+            try (Connection conn = DriverManager.getConnection(url, username, password)) {
+                String sql = "UPDATE planet_details SET planet_name = (?), population = (?) WHERE planet_id = (?)";
+                try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+                    preparedStatement.setString(1, planetDetails.getPlanet());
+                    preparedStatement.setInt(2, planetDetails.getPopulation());
+                    preparedStatement.setInt(3, planetDetails.getPlanet_id());
+                    preparedStatement.executeUpdate();
+                }
+            }
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
 
     }
 }

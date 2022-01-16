@@ -10,6 +10,7 @@
 <br/>
 <br>
 <a href="/legionslist">List of Legions</a>
+<br>
 <a href="/all-planet">Planet Details</a>
 </body>
 </html>

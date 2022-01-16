@@ -8,9 +8,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Create Planet</title>
 </head>
 <body>
+<H1>Create new Planet Details</H1>
+
+<form method="post">
+    <label>Planet details:</label><br>
+    <input name="planet"/><br><br>
+    <input name="population"/><br><br>
+
+    <input type="submit" value="Save"/>
+</form>
 
 </body>
 </html>

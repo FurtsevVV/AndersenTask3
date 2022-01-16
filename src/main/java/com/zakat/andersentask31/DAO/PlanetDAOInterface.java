@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface PlanetDAOInterface {
     List<PlanetDetails> findAllPlanetDetails();
-    void addPlanetDetails();
+    void addPlanetDetails(PlanetDetails planetDetails);
     PlanetDetails findPlanetDetailsById(int id);
     void deletePlanetDetails(int id);
     void updatePlanetDetails(PlanetDetails planetDetails);

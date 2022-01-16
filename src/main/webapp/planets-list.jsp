@@ -14,7 +14,7 @@
 <body>
 <H1>Planet Details List</H1>
 
-<p><a href='<c:url value="/create-legion" />'>New Planet Details</a></p>
+<p><a href='<c:url value="/create-planet" />'>New Planet Details</a></p>
 
 <table>
     <tr>
@@ -30,21 +30,22 @@
             <td>${planets.planet}</td>
             <td>${planets.population}</td>
             <td>
-           <!--     <form method="post" action="<c:url value="/deletePlanet" />">
-                    <input type="text" hidden name="id" value="${planets.getPlanet_id()}">
-                    <input type="submit" name="delete" value="Delete legion">
+           <form method="post" action="<c:url value="/deletePlanet" />">
+                    <input type="text" hidden name="id" value="${planets.planet_id}">
+                    <input type="submit" name="delete" value="Delete Details">
                 </form>
             </td>
             <td>
-                <form method="get" action="<c:url value="/updateLegion"/>">
-                    <input type="number" hidden name="id" value="${legions.getId()}">
-                    <input type="submit" value="Change Name">
-                </form> -->
+                <form method="get" action="<c:url value="/updatePlanet"/>">
+                    <input type="number" hidden name="id" value="${planets.planet_id}">
+                    <input type="submit" value="Update">
+                </form>
             </td>
             <td></td>
         </tr>
     </c:forEach>
 </table>
 
+<a href="/">Main page</a>
 </body>
 </html>

@@ -13,6 +13,7 @@
 <body>
 <h1>Update Legion name</h1>
 <div><strong>Current legion</strong></div>
+
 <%
     if (request.getAttribute("id") != null) {
         out.println("<p>" + "ID: " + request.getAttribute("id").toString() + "</p>");
@@ -30,5 +31,7 @@
     <input name="legion_name"/><br><br>
     <input type="submit" value="Save"/>
 </form>
-</body>
+    </body>
+
+
 </html>
