@@ -118,4 +118,28 @@ public class LegionDAO implements LegionDAOInterface {
         return legionList;
     }
 
+    @Override
+    public int findLegionIdByName(String legionName) {
+
+                try {
+            Class.forName(postgresDriver).getDeclaredConstructor().newInstance();
+            try (Connection conn = DriverManager.getConnection(url, username, password)) {
+                String sql = "SELECT legion_name, id FROM legions";
+                try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+
+                    ResultSet resultSet = preparedStatement.executeQuery();
+                    while (resultSet.next()) {
+                        String legionInBase = resultSet.getString("legion_name");
+                        int legionInBaseID = resultSet.getInt("id");
+                        if(legionName.equals(legionInBase))
+                            return legionInBaseID;
+                                            }
+                }
+            }
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+        return -1;
+    }
+
 }

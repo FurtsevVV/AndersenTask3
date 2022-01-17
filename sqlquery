@@ -1,0 +1,10 @@
+create table planet_legions (
+    planet_id int,
+    legion_id int,
+    legion_contingent int,
+    primary key (planet_id, legion_id),
+    constraint fk_planet_id
+    foreign key (planet_id) references planet_details(planet_id),
+    constraint fk_legion_id
+    foreign key (legion_id) references  legions(id)
+)

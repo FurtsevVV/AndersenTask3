@@ -40,6 +40,7 @@ List<PlanetDetails> planetDetailsList = new ArrayList<>();
         } catch (InvocationTargetException | InstantiationException | IllegalAccessException | ClassNotFoundException | NoSuchMethodException e) {
             e.printStackTrace();
         }
+
         return planetDetailsList;
     }
 
@@ -126,5 +127,28 @@ return pd;
             System.out.println(ex);
         }
 
+    }
+
+    @Override
+    public int findPlanetDetailsByPlanetName(String planetName) {
+        try {
+            Class.forName(postgresDriver).getDeclaredConstructor().newInstance();
+            try (Connection conn = DriverManager.getConnection(url, username, password)) {
+                String sql = "SELECT planet_name, planet_id FROM planet_details";
+                try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+
+                    ResultSet resultSet = preparedStatement.executeQuery();
+                    while (resultSet.next()) {
+                        String planetInBase = resultSet.getString("planet_name");
+                        int planetInBaseID = resultSet.getInt("planet_id");
+                        if(planetInBase.equals(planetName))
+                            return planetInBaseID;
+                    }
+                }
+            }
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+        return -1;
     }
 }

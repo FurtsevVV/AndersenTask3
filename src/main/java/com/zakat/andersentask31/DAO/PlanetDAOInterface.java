@@ -10,4 +10,5 @@ public interface PlanetDAOInterface {
     PlanetDetails findPlanetDetailsById(int id);
     void deletePlanetDetails(int id);
     void updatePlanetDetails(PlanetDetails planetDetails);
+    int findPlanetDetailsByPlanetName(String planetName);
 }

@@ -12,5 +12,7 @@
 <a href="/legionslist">List of Legions</a>
 <br>
 <a href="/all-planet">Planet Details</a>
+<br>
+<a href="/totalinfo">Total Info</a>
 </body>
 </html>

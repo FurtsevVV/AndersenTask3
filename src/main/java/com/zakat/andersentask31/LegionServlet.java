@@ -26,6 +26,9 @@ public class LegionServlet extends HttpServlet {
             e.printStackTrace();
         }
         req.setAttribute("legionList", legionList);
+        int ifi = legionDAO.findLegionIdByName("Word Bearers");
+        System.out.println("ID   + " + ifi);
+
         getServletContext().getRequestDispatcher("/legionslist.jsp").forward(req, resp);
     }
 

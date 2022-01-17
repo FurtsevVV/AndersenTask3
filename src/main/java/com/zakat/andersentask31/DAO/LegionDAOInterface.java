@@ -15,4 +15,6 @@ public interface LegionDAOInterface {
     public void updateLegion(Legion legion);
 
     public List<Legion> findAllLegion() throws ClassNotFoundException, NoSuchMethodException;
+
+    int findLegionIdByName(String legionName);
 }
