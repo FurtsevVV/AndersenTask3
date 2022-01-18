@@ -2,6 +2,7 @@ package com.zakat.andersentask31.entity;
 
 import java.util.Objects;
 
+
 public class PlanetLegion {
 
     int fk_planet_id;

@@ -1,11 +1,19 @@
 package com.zakat.andersentask31.entity;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "planet_details")
 public class PlanetDetails {
 
+    @Id
+            @Column(name = "planet_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int planet_id;
+    @Column(name = "planet_name")
     String planet;
+    @Column(name = "population")
     int population;
 
     public PlanetDetails() {

@@ -2,6 +2,10 @@ package com.zakat.andersentask31.DAO;
 
 import com.zakat.andersentask31.entity.Legion;
 import com.zakat.andersentask31.entity.PlanetDetails;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
@@ -10,145 +14,80 @@ import java.util.List;
 
 public class PlanetDetailsDAO implements PlanetDAOInterface{
 
-    private static String url = "jdbc:postgresql://localhost:5432/andersendb";
-    private static String username = "postgres";
-    private static String password = "root";
-    private static String postgresDriver = "org.postgresql.Driver";
+       SessionFactory factory = new Configuration()
+            .configure("hibernate.cfg.xml")
+            .addAnnotatedClass(Legion.class)
+            .buildSessionFactory();
 
     @Override
     public List<PlanetDetails> findAllPlanetDetails() {
 List<PlanetDetails> planetDetailsList = new ArrayList<>();
-        try {
-            Class.forName(postgresDriver).getDeclaredConstructor().newInstance();
-            try (Connection conn = DriverManager.getConnection(url, username, password)) {
-                Statement statement = conn.createStatement();
-                ResultSet resultSet = statement.executeQuery("SELECT * FROM planet_details");
-                while (resultSet.next()) {
-                    int id = Integer.parseInt(resultSet.getString("planet_id"));
-                    String planet = resultSet.getString("planet_name");
-                    int population = resultSet.getInt("population");
-                    PlanetDetails planetDet = new PlanetDetails();
-                    planetDet.setPlanet_id(id);
-                    planetDet.setPlanet(planet);
-                    planetDet.setPopulation(population);
-                    planetDetailsList.add(planetDet);
-                }
-                statement.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        } catch (InvocationTargetException | InstantiationException | IllegalAccessException | ClassNotFoundException | NoSuchMethodException e) {
-            e.printStackTrace();
-        }
-
+        Session session = factory.getCurrentSession();
+        session.beginTransaction();
+        planetDetailsList = session.createQuery("from PlanetDetails", PlanetDetails.class).list();
+        session.getTransaction().commit();
+        session.close();
         return planetDetailsList;
     }
 
     @Override
     public void addPlanetDetails(PlanetDetails planetDetails) {
-        try {
-            Class.forName(postgresDriver).getDeclaredConstructor().newInstance();
-            try (Connection conn = DriverManager.getConnection(url, username, password)) {
-
-                String sql = "INSERT INTO planet_details (planet_name, population) Values (?, ?)";
-                try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
-                    preparedStatement.setString(1, planetDetails.getPlanet());
-                    preparedStatement.setInt(2, planetDetails.getPopulation());
-                    preparedStatement.executeUpdate();
-                }
-            }
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }
-
+        Session session = factory.getCurrentSession();
+        session.beginTransaction();
+        session.save(planetDetails);
+        session.getTransaction().commit();
+        session.close();
     }
 
     @Override
     public PlanetDetails findPlanetDetailsById(int id) {
-PlanetDetails pd = new PlanetDetails();
-int gettingID = 0;
-String planet = "";
-int population =0;
-                try {
-            Class.forName(postgresDriver).getDeclaredConstructor().newInstance();
-            try (Connection conn = DriverManager.getConnection(url, username, password)) {
-                String sql = "SELECT * FROM planet_details WHERE planet_id = (?)";
-                try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
-                    preparedStatement.setInt(1, id);
-                    ResultSet resultSet = preparedStatement.executeQuery();
-                    if (resultSet.next()) {
-                        gettingID = resultSet.getInt("planet_id");
-                        planet = resultSet.getString("planet_name");
-                        population = resultSet.getInt("population");
-                    }
-                }
-            }
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }
-pd.setPlanet_id(gettingID);
-                pd.setPlanet(planet);
-                pd.setPopulation(population);
-return pd;
-
+        Session session = factory.getCurrentSession();
+        session.beginTransaction();
+        PlanetDetails planetDetails = session.get(PlanetDetails.class, id);
+        session.getTransaction().commit();
+        session.close();
+        return planetDetails;
 
     }
 
     @Override
     public void deletePlanetDetails(int id) {
-        try {
-            Class.forName(postgresDriver).getDeclaredConstructor().newInstance();
-            try (Connection conn = DriverManager.getConnection(url, username, password)) {
-                String sql = "DELETE FROM planet_details WHERE planet_id = (?)";
-                try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
-                    preparedStatement.setInt(1, id);
-                    preparedStatement.executeUpdate();
-                }
-            }
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }
+
+        Session session = factory.getCurrentSession();
+        session.beginTransaction();
+        PlanetDetails planetDetails = session.load(PlanetDetails.class, id);
+        session.delete(planetDetails);
+        session.getTransaction().commit();
+        session.close();
+
     }
 
     @Override
     public void updatePlanetDetails(PlanetDetails planetDetails) {
-        try {
-            Class.forName(postgresDriver).getDeclaredConstructor().newInstance();
-            try (Connection conn = DriverManager.getConnection(url, username, password)) {
-                String sql = "UPDATE planet_details SET planet_name = (?), population = (?) WHERE planet_id = (?)";
-                try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
-                    preparedStatement.setString(1, planetDetails.getPlanet());
-                    preparedStatement.setInt(2, planetDetails.getPopulation());
-                    preparedStatement.setInt(3, planetDetails.getPlanet_id());
-                    preparedStatement.executeUpdate();
-                }
-            }
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }
+
+        Session session = factory.getCurrentSession();
+        session.beginTransaction();
+        session.update(planetDetails);
+        session.getTransaction().commit();
+        session.close();
+
 
     }
 
     @Override
     public int findPlanetDetailsByPlanetName(String planetName) {
-        try {
-            Class.forName(postgresDriver).getDeclaredConstructor().newInstance();
-            try (Connection conn = DriverManager.getConnection(url, username, password)) {
-                String sql = "SELECT planet_name, planet_id FROM planet_details";
-                try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
 
-                    ResultSet resultSet = preparedStatement.executeQuery();
-                    while (resultSet.next()) {
-                        String planetInBase = resultSet.getString("planet_name");
-                        int planetInBaseID = resultSet.getInt("planet_id");
-                        if(planetInBase.equals(planetName))
-                            return planetInBaseID;
-                    }
-                }
-            }
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }
-        return -1;
+        Session session = factory.getCurrentSession();
+        session.beginTransaction();
+        Query query = session.createQuery("from PlanetDetails where planet=:name");
+        query.setParameter("name", planetName);
+        PlanetDetails planetDetails = (PlanetDetails) query.uniqueResult();
+        session.getTransaction().commit();
+        session.close();
+
+        if(planetDetails == null)
+            return -1;
+        return planetDetails.getPlanet_id();
+
     }
 }

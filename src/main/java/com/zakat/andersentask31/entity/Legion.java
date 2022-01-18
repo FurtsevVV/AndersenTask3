@@ -1,19 +1,16 @@
 package com.zakat.andersentask31.entity;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 @Table(name = "legions")
 public class Legion {
 
-    @Id
-    @Column(name = "id")
+      @Id
+      @GeneratedValue (strategy = GenerationType.IDENTITY)
+        @Column(name = "id")
     Integer id;
-    @Column(name = "legion_name")
+      @Column(name = "legion_name")
     String legion_name;
 
     public Legion() {
@@ -27,15 +24,12 @@ public class Legion {
     public Integer getId() {
         return id;
     }
-
     public void setId(Integer id) {
         this.id = id;
     }
-
     public String getLegion_name() {
         return legion_name;
     }
-
     public void setLegion_name(String legion_name) {
         this.legion_name = legion_name;
     }
