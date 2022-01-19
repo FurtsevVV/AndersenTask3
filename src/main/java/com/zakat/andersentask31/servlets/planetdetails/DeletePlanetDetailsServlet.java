@@ -1,7 +1,7 @@
 package com.zakat.andersentask31.servlets.planetdetails;
 
-import com.zakat.andersentask31.DAO.PlanetDAOInterface;
-import com.zakat.andersentask31.DAO.PlanetDetailsDAO;
+import com.zakat.andersentask31.service.PlanetDetailsService;
+import com.zakat.andersentask31.service.PlanetDetailsServiceInterface;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +13,7 @@ import java.io.IOException;
 @WebServlet("/deletePlanet")
 public class DeletePlanetDetailsServlet extends HttpServlet {
 
-    PlanetDAOInterface planetDAO = new PlanetDetailsDAO();
+    PlanetDetailsServiceInterface planetDAO = new PlanetDetailsService();
 
 
     @Override
@@ -25,5 +25,6 @@ public class DeletePlanetDetailsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
         planetDAO.deletePlanetDetails(id);
-        resp.sendRedirect(req.getContextPath() + "/all-planet");    }
+        resp.sendRedirect(req.getContextPath() + "/all-planet");
+    }
 }

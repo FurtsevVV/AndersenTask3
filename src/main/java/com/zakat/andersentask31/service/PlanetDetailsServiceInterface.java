@@ -1,10 +1,10 @@
-package com.zakat.andersentask31.DAO;
+package com.zakat.andersentask31.service;
 
 import com.zakat.andersentask31.entity.PlanetDetails;
 
 import java.util.List;
 
-public interface PlanetDAOInterface {
+public interface PlanetDetailsServiceInterface {
     List<PlanetDetails> findAllPlanetDetails();
 
     void addPlanetDetails(PlanetDetails planetDetails);

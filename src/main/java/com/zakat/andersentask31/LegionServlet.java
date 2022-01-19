@@ -1,8 +1,8 @@
 package com.zakat.andersentask31;
 
-import com.zakat.andersentask31.DAO.LegionDAO;
-import com.zakat.andersentask31.DAO.LegionDAOInterface;
 import com.zakat.andersentask31.entity.Legion;
+import com.zakat.andersentask31.service.LegionService;
+import com.zakat.andersentask31.service.LegionServiceInterface;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,8 +14,7 @@ import java.util.List;
 
 @WebServlet("/legionslist")
 public class LegionServlet extends HttpServlet {
-    LegionDAOInterface legionDAO = new LegionDAO();
-
+    LegionServiceInterface legionDAO = new LegionService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

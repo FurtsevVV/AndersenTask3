@@ -1,6 +1,5 @@
 package com.zakat.andersentask31.DAO;
 
-import com.zakat.andersentask31.entity.PlanetDetails;
 import com.zakat.andersentask31.model.TotalInfoModel;
 
 import java.lang.reflect.InvocationTargetException;
@@ -8,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlanetLegionDAO implements PlanetLegionDAOInterface{
+public class PlanetLegionDAO implements PlanetLegionDAOInterface {
 
     private static String url = "jdbc:postgresql://localhost:5432/andersendb";
     private static String username = "postgres";
@@ -17,7 +16,7 @@ public class PlanetLegionDAO implements PlanetLegionDAOInterface{
 
     @Override
     public List<TotalInfoModel> getAllInformation() {
-List<TotalInfoModel> totalModelList = new ArrayList<>();
+        List<TotalInfoModel> totalModelList = new ArrayList<>();
 
         try {
             Class.forName(postgresDriver).getDeclaredConstructor().newInstance();

@@ -1,7 +1,7 @@
 package com.zakat.andersentask31.servlets;
 
-import com.zakat.andersentask31.DAO.LegionDAO;
-import com.zakat.andersentask31.DAO.LegionDAOInterface;
+import com.zakat.andersentask31.service.LegionService;
+import com.zakat.andersentask31.service.LegionServiceInterface;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +13,7 @@ import java.io.IOException;
 @WebServlet("/deleteLegion")
 public class DeleteLegionServlet extends HttpServlet {
 
-    LegionDAOInterface legionDAO = new LegionDAO();
+    LegionServiceInterface legionDAO = new LegionService();
 
 
     @Override

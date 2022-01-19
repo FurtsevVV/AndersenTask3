@@ -1,10 +1,9 @@
 package com.zakat.andersentask31.servlets.planetdetails;
 
 
-import com.zakat.andersentask31.DAO.PlanetDAOInterface;
-import com.zakat.andersentask31.DAO.PlanetDetailsDAO;
-import com.zakat.andersentask31.entity.Legion;
 import com.zakat.andersentask31.entity.PlanetDetails;
+import com.zakat.andersentask31.service.PlanetDetailsService;
+import com.zakat.andersentask31.service.PlanetDetailsServiceInterface;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +16,7 @@ import java.util.List;
 @WebServlet("/all-planet")
 public class AllPlanetServlet extends HttpServlet {
 
-PlanetDAOInterface planetDAO = new PlanetDetailsDAO();
+    PlanetDetailsServiceInterface planetDAO = new PlanetDetailsService();
 
 
     @Override

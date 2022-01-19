@@ -6,7 +6,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
-
 import java.util.List;
 
 public class LegionDAO implements LegionDAOInterface {
@@ -19,11 +18,11 @@ public class LegionDAO implements LegionDAOInterface {
 
 
     public void insert(Legion legion) {
-            Session session = factory.getCurrentSession();
-            session.beginTransaction();
-            session.save(legion);
-            session.getTransaction().commit();
-            session.close();
+        Session session = factory.getCurrentSession();
+        session.beginTransaction();
+        session.save(legion);
+        session.getTransaction().commit();
+        session.close();
     }
 
     @Override
@@ -31,7 +30,7 @@ public class LegionDAO implements LegionDAOInterface {
         Session session = factory.getCurrentSession();
         session.beginTransaction();
         Legion legion = session.load(Legion.class, id);
-session.delete(legion);
+        session.delete(legion);
         session.getTransaction().commit();
         session.close();
     }
@@ -40,7 +39,7 @@ session.delete(legion);
     public Legion getLegionById(int id) {
         Session session = factory.getCurrentSession();
         session.beginTransaction();
-Legion legion = session.get(Legion.class, id);
+        Legion legion = session.get(Legion.class, id);
         session.getTransaction().commit();
         session.close();
 
@@ -51,7 +50,7 @@ Legion legion = session.get(Legion.class, id);
     public void updateLegion(Legion legion) {
         Session session = factory.getCurrentSession();
         session.beginTransaction();
-         session.update(legion);
+        session.update(legion);
         session.getTransaction().commit();
         session.close();
 
@@ -60,11 +59,11 @@ Legion legion = session.get(Legion.class, id);
     @Override
     public List<Legion> findAllLegion() throws ClassNotFoundException, NoSuchMethodException {
         List<Legion> legionList;
-            Session session = factory.getCurrentSession();
-            session.beginTransaction();
-            legionList = session.createQuery("from Legion", Legion.class).list();
-            session.getTransaction().commit();
-            session.close();
+        Session session = factory.getCurrentSession();
+        session.beginTransaction();
+        legionList = session.createQuery("from Legion", Legion.class).list();
+        session.getTransaction().commit();
+        session.close();
         return legionList;
     }
 
@@ -78,11 +77,10 @@ Legion legion = session.get(Legion.class, id);
         session.getTransaction().commit();
         session.close();
 
-        if(legion == null)
+        if (legion == null)
             return -1;
         return legion.getId();
     }
-
 
 
 }

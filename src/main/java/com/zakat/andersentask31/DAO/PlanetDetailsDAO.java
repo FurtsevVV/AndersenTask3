@@ -7,21 +7,19 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
-import java.lang.reflect.InvocationTargetException;
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlanetDetailsDAO implements PlanetDAOInterface{
+public class PlanetDetailsDAO implements PlanetDAOInterface {
 
-       SessionFactory factory = new Configuration()
+    SessionFactory factory = new Configuration()
             .configure("hibernate.cfg.xml")
             .addAnnotatedClass(Legion.class)
             .buildSessionFactory();
 
     @Override
     public List<PlanetDetails> findAllPlanetDetails() {
-List<PlanetDetails> planetDetailsList = new ArrayList<>();
+        List<PlanetDetails> planetDetailsList = new ArrayList<>();
         Session session = factory.getCurrentSession();
         session.beginTransaction();
         planetDetailsList = session.createQuery("from PlanetDetails", PlanetDetails.class).list();
@@ -85,7 +83,7 @@ List<PlanetDetails> planetDetailsList = new ArrayList<>();
         session.getTransaction().commit();
         session.close();
 
-        if(planetDetails == null)
+        if (planetDetails == null)
             return -1;
         return planetDetails.getPlanet_id();
 

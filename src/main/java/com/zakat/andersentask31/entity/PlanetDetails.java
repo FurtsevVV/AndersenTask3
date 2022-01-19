@@ -1,6 +1,7 @@
 package com.zakat.andersentask31.entity;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -8,7 +9,7 @@ import java.util.Objects;
 public class PlanetDetails {
 
     @Id
-            @Column(name = "planet_id")
+    @Column(name = "planet_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int planet_id;
     @Column(name = "planet_name")
@@ -22,6 +23,19 @@ public class PlanetDetails {
     public PlanetDetails(String planet, int population) {
         this.planet = planet;
         this.population = population;
+    }
+
+    @ManyToMany(cascade = CascadeType.PERSIST)
+@JoinTable(name = "planet_legions", joinColumns = {@JoinColumn(name = "planet_id")},
+inverseJoinColumns = {@JoinColumn(name = "legion_id")})
+            List<Legion> legions;
+
+    public List<Legion> getLegions() {
+        return legions;
+    }
+
+    public void setLegions(List<Legion> legions) {
+        this.legions = legions;
     }
 
     public int getPlanet_id() {

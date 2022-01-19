@@ -1,31 +1,30 @@
 package com.zakat.andersentask31.entity;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
+@Entity
+@Table(name="planet_legions")
+public class PlanetLegion implements Serializable {
 
-public class PlanetLegion {
+    private static final long serialVersionUID = 1L;
 
-    int fk_planet_id;
-    int fk_legion_id;
+    @EmbeddedId
+    private PlanetLegionPK planetLegionPK;
+
+@Column(name = "legion_contingent")
     int contingent;
 
     public PlanetLegion() {
     }
 
-    public int getFk_planet_id() {
-        return fk_planet_id;
+    public PlanetLegionPK getPlanetLegionPK() {
+        return planetLegionPK;
     }
 
-    public void setFk_planet_id(int fk_planet_id) {
-        this.fk_planet_id = fk_planet_id;
-    }
-
-    public int getFk_legion_id() {
-        return fk_legion_id;
-    }
-
-    public void setFk_legion_id(int fk_legion_id) {
-        this.fk_legion_id = fk_legion_id;
+    public void setPlanetLegionPK(PlanetLegionPK planetLegionPK) {
+        this.planetLegionPK = planetLegionPK;
     }
 
     public int getContingent() {
@@ -41,20 +40,11 @@ public class PlanetLegion {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PlanetLegion that = (PlanetLegion) o;
-        return fk_planet_id == that.fk_planet_id && fk_legion_id == that.fk_legion_id && contingent == that.contingent;
+        return contingent == that.contingent && Objects.equals(planetLegionPK, that.planetLegionPK);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(fk_planet_id, fk_legion_id, contingent);
-    }
-
-    @Override
-    public String toString() {
-        return "PlanetLegion{" +
-                "fk_planet_id=" + fk_planet_id +
-                ", fk_legion_id=" + fk_legion_id +
-                ", contingent=" + contingent +
-                '}';
+        return Objects.hash(planetLegionPK, contingent);
     }
 }

@@ -1,10 +1,9 @@
 package com.zakat.andersentask31.servlets.planetdetails;
 
 
-import com.zakat.andersentask31.DAO.PlanetDAOInterface;
-import com.zakat.andersentask31.DAO.PlanetDetailsDAO;
-import com.zakat.andersentask31.entity.Legion;
 import com.zakat.andersentask31.entity.PlanetDetails;
+import com.zakat.andersentask31.service.PlanetDetailsService;
+import com.zakat.andersentask31.service.PlanetDetailsServiceInterface;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,8 +15,8 @@ import java.io.IOException;
 @WebServlet("/updatePlanet")
 public class UpdatePlanetDetailsServlet extends HttpServlet {
 
-    PlanetDAOInterface planetDAO = new PlanetDetailsDAO();
-int id;
+    PlanetDetailsServiceInterface planetDAO = new PlanetDetailsService();
+    int id;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,7 +25,8 @@ int id;
         req.setAttribute("id", planetDetails.getPlanet_id());
         req.setAttribute("planet", planetDetails.getPlanet());
         req.setAttribute("population", planetDetails.getPopulation());
-        getServletContext().getRequestDispatcher("/update_planet.jsp").forward(req, resp);    }
+        getServletContext().getRequestDispatcher("/update_planet.jsp").forward(req, resp);
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -36,5 +36,6 @@ int id;
         pd.setPopulation(Integer.parseInt(req.getParameter("population")));
 
         planetDAO.updatePlanetDetails(pd);
-        resp.sendRedirect(req.getContextPath() + "/all-planet");    }
+        resp.sendRedirect(req.getContextPath() + "/all-planet");
+    }
 }

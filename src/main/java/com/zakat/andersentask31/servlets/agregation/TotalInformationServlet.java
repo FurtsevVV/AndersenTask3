@@ -1,7 +1,7 @@
 package com.zakat.andersentask31.servlets.agregation;
 
-import com.zakat.andersentask31.DAO.*;
-import com.zakat.andersentask31.entity.PlanetDetails;
+import com.zakat.andersentask31.DAO.PlanetLegionDAO;
+import com.zakat.andersentask31.DAO.PlanetLegionDAOInterface;
 import com.zakat.andersentask31.model.TotalInfoModel;
 
 import javax.servlet.ServletException;
@@ -15,8 +15,7 @@ import java.util.List;
 @WebServlet("/totalinfo")
 public class TotalInformationServlet extends HttpServlet {
 
-PlanetLegionDAOInterface plDAO = new PlanetLegionDAO();
-
+    PlanetLegionDAOInterface plDAO = new PlanetLegionDAO();
 
 
     @Override

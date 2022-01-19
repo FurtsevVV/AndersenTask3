@@ -1,9 +1,8 @@
 package com.zakat.andersentask31.servlets.planetdetails;
 
-import com.zakat.andersentask31.DAO.PlanetDAOInterface;
-import com.zakat.andersentask31.DAO.PlanetDetailsDAO;
-import com.zakat.andersentask31.entity.Legion;
 import com.zakat.andersentask31.entity.PlanetDetails;
+import com.zakat.andersentask31.service.PlanetDetailsService;
+import com.zakat.andersentask31.service.PlanetDetailsServiceInterface;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,12 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
 @WebServlet("/create-planet")
 public class CreatePlanetDetailsServlet extends HttpServlet {
 
-    PlanetDAOInterface planetDAO = new PlanetDetailsDAO();
+    PlanetDetailsServiceInterface planetDAO = new PlanetDetailsService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -33,4 +31,5 @@ public class CreatePlanetDetailsServlet extends HttpServlet {
 
         resp.sendRedirect(req.getContextPath() + "/all-planet");
 
-}}
+    }
+}
